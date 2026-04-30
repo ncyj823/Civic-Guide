@@ -36,6 +36,26 @@
 }
 
 @layer base {
+  :root {
+    --vsc-bg: #ffffff;
+    --vsc-border: #cccccc;
+    --vsc-text-main: #112e51;
+    --vsc-text-muted: #5c5c5c;
+    --vsc-input-bg: #ffffff;
+    --vsc-input-border: #b3b3b3;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --vsc-bg: #112e51; /* Dark Navy */
+      --vsc-border: #3d4551;
+      --vsc-text-main: #f0f0f0;
+      --vsc-text-muted: #cccccc;
+      --vsc-input-bg: #0b4778;
+      --vsc-input-border: #1a4480;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
   }

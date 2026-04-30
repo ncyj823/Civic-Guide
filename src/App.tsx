@@ -7,6 +7,7 @@ import { motion } from 'motion/react';
 import { ChatAssistant } from './components/ChatAssistant';
 import { Timeline } from './components/Timeline';
 import { GuideSection } from './components/GuideSection';
+import { VoterStatusChecker } from './components/VoterStatusChecker';
 import { Vote, ShieldCheck, HelpCircle, ChevronDown } from 'lucide-react';
 
 export default function App() {
@@ -69,6 +70,17 @@ export default function App() {
             <ChatAssistant />
           </motion.div>
         </div>
+
+        {/* Status Checker Section */}
+        <section id="status-checker" className="mb-32 scroll-mt-24">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-slate-900 mb-4 tracking-tight">Check Your Voter Status</h2>
+            <p className="text-slate-500 max-w-xl mx-auto">
+              Verify your enrollment details instantly across all states and union territories.
+            </p>
+          </div>
+          <VoterStatusChecker />
+        </section>
 
         {/* Timeline Section */}
         <section id="how-it-works" className="mb-32 scroll-mt-24">
