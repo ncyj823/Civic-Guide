@@ -50,7 +50,7 @@ export default function App() {
               track important dates, and get AI-powered answers to your civic questions.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#assistant" className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold shadow-lg shadow-slate-200 hover:shadow-xl hover:translate-y-[-2px] transition-all">
+              <a href="#assistant" className="px-8 py-4 bg-red-700 text-white rounded-2xl font-bold shadow-lg shadow-slate-200 hover:bg-red-800 hover:shadow-xl hover:translate-y-[-2px] transition-all">
                 Ask Civic Assistant
               </a>
               <a href="#how-it-works" className="px-8 py-4 bg-white border border-slate-200 text-slate-900 rounded-2xl font-bold hover:bg-slate-50 transition-all">

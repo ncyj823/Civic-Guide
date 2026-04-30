@@ -1,9 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300..900;1,300..900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Merriweather", serif;
+  
+  /* Government Theme Colors (USWDS Inspired) */
+  --color-blue-50: #e1f3f8;
+  --color-blue-100: #ccecf6;
+  --color-blue-200: #9bdaf1;
+  --color-blue-300: #73b3e7;
+  --color-blue-400: #4f97d1;
+  --color-blue-500: #2c7abf;
+  --color-blue-600: #005ea2; /* USWDS Primary */
+  --color-blue-700: #1a4480; /* USWDS Primary Darker */
+  --color-blue-800: #112e51; /* USWDS Primary Darkest */
+  --color-blue-900: #0b4778; 
+  --color-blue-950: #072a48;
+
+  --color-slate-50: #f0f0f0;
+  --color-slate-100: #e6e6e6;
+  --color-slate-200: #cccccc;
+  --color-slate-300: #b3b3b3;
+  --color-slate-400: #999999;
+  --color-slate-500: #808080;
+  --color-slate-600: #5c5c5c;
+  --color-slate-700: #3d4551; /* USWDS Gray-Cool-70 */
+  --color-slate-800: #212123;
+  --color-slate-900: #112e51; /* Dark Navy for text and dark backgrounds */
+
+  /* Red Accents */
+  --color-red-600: #e31c3d;
+  --color-red-700: #b31942;
+  --color-red-800: #8b0a1a;
 }
 
 @layer base {
