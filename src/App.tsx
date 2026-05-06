@@ -10,11 +10,15 @@ import { GuideSection } from './components/GuideSection';
 import { VoterStatusChecker } from './components/VoterStatusChecker';
 import { PollingBoothLocator } from './components/PollingBoothLocator';
 import { CandidateProfiles } from './components/CandidateProfiles';
-import { Vote, ShieldCheck, HelpCircle, ChevronDown, MapPin, Users } from 'lucide-react';
+import { LanguageProvider, LanguageSwitcher, useLanguage } from './components/LanguageSwitcher';
+import { Vote, ShieldCheck, HelpCircle, ChevronDown, MapPin, Users, Info } from 'lucide-react';
 
-export default function App() {
+function AppContent() {
+  const { t } = useLanguage();
+
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-blue-100">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-blue-100">
+      <LanguageSwitcher />
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -22,14 +26,14 @@ export default function App() {
             <div className="bg-blue-600 p-1.5 rounded-lg">
               <Vote className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-xl tracking-tight text-slate-900">CivicGuide</span>
+            <span className="font-bold text-xl tracking-tight text-slate-900">{t.appTitle}</span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-            <a href="#how-it-works" className="hover:text-blue-600 transition-colors">Process</a>
-            <a href="#booth-locator" className="hover:text-blue-600 transition-colors">Locate Booth</a>
+            <a href="#how-it-works" className="hover:text-blue-600 transition-colors">{t.tabHowItWorks}</a>
+            <a href="#booth-locator" className="hover:text-blue-600 transition-colors">{t.tabTimeline}</a>
             <a href="#candidates" className="hover:text-blue-600 transition-colors">Candidates</a>
-            <a href="#guides" className="hover:text-blue-600 transition-colors">Guides</a>
-            <a href="#assistant" className="px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-all">Smart Assistant</a>
+            <a href="#guides" className="hover:text-blue-600 transition-colors">{t.tabGlossary}</a>
+            <a href="#assistant" className="px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-all">{t.tabAskAnything}</a>
           </div>
         </div>
       </nav>
@@ -47,19 +51,18 @@ export default function App() {
               Empowering Every Voter
             </div>
             <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-[0.95] tracking-tight mb-8">
-              Democracy <br />
+              {t.appTitle} <br />
               <span className="text-blue-600 italic">Simplified.</span>
             </h1>
             <p className="text-lg text-slate-600 leading-relaxed max-w-lg mb-10">
-              Your non-partisan companion for navigating elections. Understand the process, 
-              track important dates, and get AI-powered answers to your civic questions.
+              {t.welcomeMsg1} <br /> {t.welcomeMsg2}
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#assistant" className="px-8 py-4 bg-red-700 text-white rounded-2xl font-bold shadow-lg shadow-slate-200 hover:bg-red-800 hover:shadow-xl hover:translate-y-[-2px] transition-all">
-                Ask Civic Assistant
+              <a href="https://voters.eci.gov.in" target="_blank" rel="noreferrer" className="px-8 py-4 bg-red-700 text-white rounded-2xl font-bold shadow-lg shadow-slate-200 hover:bg-red-800 hover:shadow-xl hover:translate-y-[-2px] transition-all">
+                {t.registrationCTA}
               </a>
-              <a href="#how-it-works" className="px-8 py-4 bg-white border border-slate-200 text-slate-900 rounded-2xl font-bold hover:bg-slate-50 transition-all">
-                See the Process
+              <a href="#booth-locator" className="px-8 py-4 bg-white border border-slate-200 text-slate-900 rounded-2xl font-bold hover:bg-slate-50 transition-all">
+                Find Booth
               </a>
             </div>
           </motion.div>
@@ -190,14 +193,18 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="flex items-center justify-center gap-2 mb-4">
             <div className="bg-blue-600 p-1.5 rounded-lg">
               <Vote className="w-4 h-4 text-white" />
             </div>
-            <span className="font-bold text-lg tracking-tight text-slate-900">CivicGuide</span>
+            <span className="font-bold text-lg tracking-tight text-slate-900">{t.appTitle}</span>
+          </div>
+          <div className="flex items-center justify-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-8 bg-slate-50 py-2 px-4 rounded-full w-fit mx-auto border border-slate-100">
+            <Info size={14} className="text-blue-600" />
+            {t.eciFooter}
           </div>
           <p className="text-sm text-slate-500 mb-8 max-w-md mx-auto leading-relaxed">
-            CivicGuide is a non-partisan educational tool designed to increase electoral literacy. 
+            {t.welcomeMsg1} <br />
             Information provided is for educational purposes only.
           </p>
           <div className="flex justify-center gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
@@ -206,10 +213,18 @@ export default function App() {
             <a href="https://ballotpedia.org" target="_blank" rel="noreferrer" className="hover:text-blue-600 transition-colors">Ballotpedia</a>
           </div>
           <div className="mt-12 text-slate-300 text-[10px] uppercase tracking-[0.2em]">
-            &copy; 2026 CivicGuide Project
+            &copy; 2026 {t.appTitle} Project
           </div>
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }

@@ -21,7 +21,10 @@ interface Booth {
   totalVoters: number;
 }
 
+import { useLanguage } from './LanguageSwitcher';
+
 export const PollingBoothLocator: React.FC = () => {
+  const { t } = useLanguage();
   const [pincode, setPincode] = useState('');
   const [state, setState] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -112,7 +115,7 @@ export const PollingBoothLocator: React.FC = () => {
             <label className="block text-[10px] uppercase font-black tracking-widest text-[var(--vsc-text-muted)] mb-2 px-1">Pincode</label>
             <input 
               type="text" 
-              placeholder="6 Digit PIN"
+              placeholder={t.boothPlaceholder}
               maxLength={6}
               value={pincode}
               onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
