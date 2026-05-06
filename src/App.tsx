@@ -135,8 +135,6 @@ function AppContent() {
           <Timeline />
         </section>
 
-        </section>
-
         {/* Myth Busters Section */}
         <section id="myth-busters" className="mb-32 scroll-mt-24">
           <MythBusters />
@@ -159,8 +157,6 @@ function AppContent() {
             </div>
           </div>
           <GuideSection />
-        </section>
-
         </section>
 
         {/* Election Reminder Section */}
