@@ -43,6 +43,10 @@
     --vsc-text-muted: #5c5c5c;
     --vsc-input-bg: #ffffff;
     --vsc-input-border: #b3b3b3;
+    --pbl-green: #2e7d32;
+    --pbl-amber: #f57c00;
+    --pbl-red: #d32f2f;
+    --pbl-border-width: 0.5px;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -53,6 +57,9 @@
       --vsc-text-muted: #cccccc;
       --vsc-input-bg: #0b4778;
       --vsc-input-border: #1a4480;
+      --pbl-green: #4caf50;
+      --pbl-amber: #ffb74d;
+      --pbl-red: #ef5350;
     }
   }
 

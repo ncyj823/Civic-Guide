@@ -8,7 +8,8 @@ import { ChatAssistant } from './components/ChatAssistant';
 import { Timeline } from './components/Timeline';
 import { GuideSection } from './components/GuideSection';
 import { VoterStatusChecker } from './components/VoterStatusChecker';
-import { Vote, ShieldCheck, HelpCircle, ChevronDown } from 'lucide-react';
+import { PollingBoothLocator } from './components/PollingBoothLocator';
+import { Vote, ShieldCheck, HelpCircle, ChevronDown, MapPin } from 'lucide-react';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
             <a href="#how-it-works" className="hover:text-blue-600 transition-colors">Process</a>
+            <a href="#booth-locator" className="hover:text-blue-600 transition-colors">Locate Booth</a>
             <a href="#guides" className="hover:text-blue-600 transition-colors">Guides</a>
             <a href="#assistant" className="px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-all">Smart Assistant</a>
           </div>
@@ -80,6 +82,17 @@ export default function App() {
             </p>
           </div>
           <VoterStatusChecker />
+        </section>
+        
+        {/* Polling Booth Locator Section */}
+        <section id="booth-locator" className="mb-32 scroll-mt-24">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-slate-900 mb-4 tracking-tight">Locate Your Polling Booth</h2>
+            <p className="text-slate-500 max-w-xl mx-auto">
+              Find the nearest polling station in your area and check real-time capacity metrics.
+            </p>
+          </div>
+          <PollingBoothLocator />
         </section>
 
         {/* Timeline Section */}
