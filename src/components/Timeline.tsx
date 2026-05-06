@@ -1,86 +1,51 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
-import { TimelineStep } from '../types';
-import { Calendar, CheckCircle2, Flag, ArrowRight } from 'lucide-react';
+import { Calendar, CheckCircle2, Flag, ArrowRight, ClipboardCheck, Search, Vote, Landmark, Scale } from 'lucide-react';
+import { useProgress } from './ProgressContext';
 
-const steps: TimelineStep[] = [
-  {
-    id: '1',
-    title: 'Voter Registration',
-    dateRange: 'Throughout the Year',
-    description: 'Ensure you are eligible and registered to vote in your state.',
-    longDescription: 'Registration deadlines vary by state, often 15-30 days before an election. Some states offer same-day registration.'
-  },
-  {
-    id: '2',
-    title: 'Primary Elections',
-    dateRange: 'Feb - June',
-    description: 'Political parties choose their candidates for the general election.',
-    longDescription: 'Primaries can be closed (only party members) or open (any voter). This is when you help decide who represents your party.'
-  },
-  {
-    id: '3',
-    title: 'General Election Prep',
-    dateRange: 'Sept - Oct',
-    description: 'Research candidates, find your polling place, and request mail-in ballots.',
-    longDescription: 'Use this time to review non-partisan voter guides and check your registration status one last time.'
-  },
-  {
-    id: '4',
-    title: 'Election Day',
-    dateRange: 'Early Nov',
-    description: 'Cast your vote in person or ensure your mail-in ballot is postmarked.',
-    longDescription: 'The General Election is held on the Tuesday after the first Monday in November. Polls typically open early and close late.'
-  },
+const steps = [
+  { id: '1', title: 'Voter Registration', dateRange: 'Ongoing', description: 'Apply for voter ID or update your details.', icon: <ClipboardCheck size={20} /> },
+  { id: '2', title: 'Candidate Nominations', dateRange: 'Phase 1', description: 'Political parties finalize their candidate lists.', icon: <Landmark size={20} /> },
+  { id: '3', title: 'Scrutiny & Withdrawal', dateRange: 'Phase 2', description: 'Verification of nomination papers by officials.', icon: <Search size={20} /> },
+  { id: '4', title: 'Campaigning Period', dateRange: '2 Weeks', description: 'Candidates share their manifestos and platforms.', icon: <Vote size={20} /> },
+  { id: '5', title: 'Polling Day', dateRange: 'Election Day', description: 'The big day! Cast your vote at your assigned booth.', icon: <CheckCircle2 size={20} /> },
+  { id: '6', title: 'Counting & Results', dateRange: 'Post-Election', description: 'The official counting of votes and declaration of winners.', icon: <Flag size={20} /> },
 ];
 
 export const Timeline: React.FC = () => {
+  const { updateTimeline } = useProgress();
+
   return (
     <div className="py-12 px-4 max-w-5xl mx-auto">
       <div className="flex flex-col space-y-8">
         {steps.map((step, index) => (
           <motion.div
             key={step.id}
+            onViewportEnter={() => updateTimeline(step.id)}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.5 }}
             transition={{ delay: index * 0.1 }}
             className="relative flex gap-6 group"
           >
-            {/* Timeline Line */}
             {index !== steps.length - 1 && (
-              <div className="absolute left-6 top-10 bottom-0 w-[2px] bg-gray-100 group-hover:bg-blue-200 transition-colors hidden md:block" />
+              <div className="absolute left-6 top-10 bottom-0 w-[2px] bg-slate-100 group-hover:bg-blue-200 transition-colors hidden md:block" />
             )}
 
-            {/* Icon Circle */}
-            <div className="relative z-10 w-12 h-12 flex-shrink-0 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center border-4 border-white shadow-sm transition-transform group-hover:scale-110">
-              {index === 0 ? <CheckCircle2 size={24} /> : 
-               index === steps.length - 1 ? <Flag size={20} /> :
-               <Calendar size={20} />}
+            <div className="relative z-10 w-12 h-12 flex-shrink-0 bg-white text-slate-400 group-hover:text-blue-600 rounded-full flex items-center justify-center border-2 border-slate-100 group-hover:border-blue-200 shadow-sm transition-all group-hover:scale-110">
+              {step.icon}
             </div>
 
-            {/* Content Card */}
-            <div className="flex-1 bg-white p-6 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 hover:border-blue-200 transition-all">
+            <div className="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all">
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h4 className="text-lg font-bold text-slate-800">{step.title}</h4>
-                <span className="text-xs font-mono font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-md uppercase tracking-wider">
+                <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-widest">
                   {step.dateRange}
                 </span>
               </div>
-              <p className="text-sm text-slate-600 mb-3 leading-relaxed">
+              <p className="text-sm text-slate-500 leading-relaxed">
                 {step.description}
               </p>
-              <div className="pt-4 mt-4 border-t border-gray-50 flex items-start gap-3">
-                <ArrowRight size={14} className="mt-1 text-blue-400 flex-shrink-0" />
-                <p className="text-xs text-slate-500 italic">
-                  {step.longDescription}
-                </p>
-              </div>
             </div>
           </motion.div>
         ))}

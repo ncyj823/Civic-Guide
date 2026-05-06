@@ -1,62 +1,38 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React from 'react';
 import { motion } from 'motion/react';
-import { ClipboardCheck, Search, Vote, Info } from 'lucide-react';
+import { ClipboardCheck, Search, Vote, Info, MapPin, ShieldCheck, HelpCircle } from 'lucide-react';
+import { useProgress } from './ProgressContext';
 
 const guides = [
-  {
-    title: 'Phase 1: Registration',
-    icon: <ClipboardCheck className="w-6 h-6" />,
-    steps: [
-      'Check eligibility (Citizen, 18+, Resident)',
-      'Visit Vote.gov to register online',
-      'Or register by mail or in person',
-      'Confirm registration status periodically'
-    ]
-  },
-  {
-    title: 'Phase 2: Research',
-    icon: <Search className="w-6 h-6" />,
-    steps: [
-      'Look up your sample ballot',
-      'Research candidate records and platforms',
-      'Understand local ballot measures',
-      'Check non-partisan sources like Vote411'
-    ]
-  },
-  {
-    title: 'Phase 3: Casting Vote',
-    icon: <Vote className="w-6 h-6" />,
-    steps: [
-      'Decide: In-person, Early, or Mail-in',
-      'Identify your polling place',
-      'Bring required ID (if state law requires)',
-      'Stay in line even if the polls close'
-    ]
-  }
+  { id: 1, title: 'Check Enrollment', icon: <ClipboardCheck />, steps: ['Verify name in roll', 'Check polling booth'] },
+  { id: 2, title: 'Research Candidates', icon: <Search />, steps: ['Review affidavits', 'Check track record'] },
+  { id: 3, title: 'Locate Booth', icon: <MapPin />, steps: ['Find booth location', 'Check accessibility'] },
+  { id: 4, title: 'ID Verification', icon: <ShieldCheck />, steps: ['Bring Voter ID (EPIC)', 'Or 12 alternate IDs'] },
+  { id: 5, title: 'In-Booth Process', icon: <HelpCircle />, steps: ['Finger marking', 'Press EVM button'] },
+  { id: 6, title: 'Collect Slip', icon: <Vote />, steps: ['Verify VVPAT slip', 'Collect ink mark'] },
 ];
 
 export const GuideSection: React.FC = () => {
+  const { updateHowItWorks } = useProgress();
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8">
       {guides.map((guide, idx) => (
         <motion.div
-          key={idx}
+          key={guide.id}
+          onViewportEnter={() => updateHowItWorks(guide.id)}
+          viewport={{ once: true, amount: 0.5 }}
           whileHover={{ y: -5 }}
-          className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col h-full"
+          className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-full group hover:border-blue-200 transition-all"
         >
-          <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-600 mb-6">
+          <div className="w-12 h-12 bg-slate-50 group-hover:bg-blue-50 rounded-xl flex items-center justify-center text-slate-400 group-hover:text-blue-600 mb-6 transition-colors">
             {guide.icon}
           </div>
           <h4 className="text-lg font-bold text-slate-800 mb-4">{guide.title}</h4>
           <ul className="space-y-3 flex-1">
             {guide.steps.map((step, sIdx) => (
-              <li key={sIdx} className="flex gap-3 text-sm text-slate-600">
-                <span className="w-5 h-5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+              <li key={sIdx} className="flex gap-3 text-sm text-slate-500">
+                <span className="w-5 h-5 rounded-full bg-slate-50 text-slate-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
                   {sIdx + 1}
                 </span>
                 {step}
@@ -65,14 +41,6 @@ export const GuideSection: React.FC = () => {
           </ul>
         </motion.div>
       ))}
-      <div className="md:col-span-3 mt-4 p-4 bg-amber-50 border border-amber-100 rounded-xl flex gap-4 items-center">
-        <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 flex-shrink-0">
-          <Info size={20} />
-        </div>
-        <p className="text-sm text-amber-800 font-medium">
-          Election laws vary by state. Always consult your official Secretary of State website for the most accurate local deadlines.
-        </p>
-      </div>
     </div>
   );
 };

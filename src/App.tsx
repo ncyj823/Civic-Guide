@@ -10,6 +10,12 @@ import { GuideSection } from './components/GuideSection';
 import { VoterStatusChecker } from './components/VoterStatusChecker';
 import { PollingBoothLocator } from './components/PollingBoothLocator';
 import { CandidateProfiles } from './components/CandidateProfiles';
+import { ElectionReminder } from './components/ElectionReminder';
+import { MythBusters } from './components/MythBusters';
+import { VoterBadgeSystem } from './components/VoterBadgeSystem';
+import { AccessibilityPanel } from './components/AccessibilityPanel';
+import { OfflineStatusBanner, OfflineManager } from './components/OfflineManager';
+import { ProgressProvider } from './components/ProgressContext';
 import { LanguageProvider, LanguageSwitcher, useLanguage } from './components/LanguageSwitcher';
 import { Vote, ShieldCheck, HelpCircle, ChevronDown, MapPin, Users, Info } from 'lucide-react';
 
@@ -18,6 +24,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-blue-100">
+      <OfflineStatusBanner />
       <LanguageSwitcher />
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
@@ -78,6 +85,11 @@ function AppContent() {
           </motion.div>
         </div>
 
+        {/* Gamified Progress & Badge Section */}
+        <section id="voter-badge" className="mb-32 scroll-mt-24">
+          <VoterBadgeSystem />
+        </section>
+
         {/* Status Checker Section */}
         <section id="status-checker" className="mb-32 scroll-mt-24">
           <div className="text-center mb-16">
@@ -123,6 +135,13 @@ function AppContent() {
           <Timeline />
         </section>
 
+        </section>
+
+        {/* Myth Busters Section */}
+        <section id="myth-busters" className="mb-32 scroll-mt-24">
+          <MythBusters />
+        </section>
+
         {/* Guides Section */}
         <section id="guides" className="mb-32 scroll-mt-24">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-slate-200 pb-8">
@@ -140,6 +159,18 @@ function AppContent() {
             </div>
           </div>
           <GuideSection />
+        </section>
+
+        </section>
+
+        {/* Election Reminder Section */}
+        <section id="reminders" className="mb-32 scroll-mt-24">
+          <ElectionReminder />
+        </section>
+
+        {/* Offline Content Management Section */}
+        <section id="offline-manager" className="mb-32 scroll-mt-24">
+          <OfflineManager />
         </section>
 
         {/* FAQ - Quick Terms */}
@@ -217,6 +248,7 @@ function AppContent() {
           </div>
         </div>
       </footer>
+      <AccessibilityPanel />
     </div>
   );
 }
@@ -224,7 +256,9 @@ function AppContent() {
 export default function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <ProgressProvider>
+        <AppContent />
+      </ProgressProvider>
     </LanguageProvider>
   );
 }
