@@ -1,3 +1,6 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "css.customData": [
+        "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/master/packages/tailwindcss/theme.json"
+    ]
 }
