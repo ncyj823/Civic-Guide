@@ -127,7 +127,15 @@
   }
 
   .countdown-block {
-    @apply bg-slate-900 text-white rounded-xl p-4 min-w-[80px] flex flex-col items-center shadow-lg;
+    background-color: #112e51;
+    color: #ffffff;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
